@@ -24,7 +24,7 @@ Määra emotsiooni tunnus sagedustabelis reatunnuseks. Tekkiv sagedustabel omist
 - **Ülesanne 3** Kasutades eelnevalt tekitatud sagedustabeli-objekti leia tekstilõikude hinnangute jaotus mõlemas tekstilõikude grupis (st nii nende lõikude osas, kus stringi ei esinenud, kui selles grupis, kus esines). Omista saadud tabel muutujale `tinglikjaotus`, prindi see ekraanile.
 
 *** =hint
-- Esimeses ülesandes kasuta funktsiooni `str_detect`, määra `pattern` argumendiks `[E|e]esti`.
+- Esimeses ülesandes kasuta funktsiooni `str_detect` või  `str_count`, kus määra `pattern` argumendiks `[E|e]esti`. Käsk `str_count` annab tulemsueks esinemiste arvu, seega nõutud tõeväärtustega vektori saamiseks peab veel kontrollima, kas tulemused on üle nulli.
 - Kolmandas ülesandes kasuta käsku `prop.table`, määrama peab ka selle, kas jaotus leida kogu tabeli summa või rea/veerusummade suhtes.
 
 *** =pre_exercise_code
