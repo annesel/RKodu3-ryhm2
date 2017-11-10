@@ -68,6 +68,8 @@ str(tekstid)
 
 # Ülesanne 1: tuvasta stringi esinemine
 esineb <- str_detect(tekstid$tekst, pattern = "[E|e]esti")
+# või
+# esineb <- str_count(tekstid$tekst, pattern = "[E|e]esti") > 0 
 
 # Ülesanne 2: sagedustabeli leidmine
 sagedustabel <- table(tekstid$hinnang, esineb)
@@ -99,17 +101,30 @@ tinglikjaotus
 #------------
 
 # 1
+test_or(
 test_function(name = "str_detect",
               args = c("string", "pattern"),
               index = 1,
              eq_condition = "equivalent",
-             not_called_msg = "Esimeses ülesandes pead kasutama funktsiooni `str_detect`.",
+             not_called_msg = "Esimeses ülesandes saab kasutada funktsiooni `str_detect`.",
              args_not_specified_msg = paste("Käsus `str_detect` on vaja ", 
              c("esimeseks argumendiks panna tekstilõikude vektor", 
              "teiseks argumendiks panna otsitav string")),
              incorrect_msg = paste("Käsus `str_detect` on praegu ", 
              c("esimene argument  vale.",
-             "teine argument on vale, määra otsitavaks stringiks `[E|e]esti`."))) 
+             "teine argument   vale, määra otsitavaks stringiks `[E|e]esti`."))), 
+test_function(name = "str_count",
+              args = c("string", "pattern"),
+              index = 1,
+             eq_condition = "equivalent",
+             not_called_msg = "Esimeses ülesandes saab kasutada funktsiooni `str_count`.",
+             args_not_specified_msg = paste("Käsus `str_count` on vaja ", 
+             c("esimeseks argumendiks panna tekstilõikude vektor", 
+             "teiseks argumendiks panna otsitav string")),
+             incorrect_msg = paste("Käsus `str_count` on praegu ", 
+             c("esimene argument  vale.",
+             "teine argument   vale, määra otsitavaks stringiks `[E|e]esti`.")))
+)
 
 
 test_object("esineb", 
