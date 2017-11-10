@@ -1,130 +1,322 @@
 ---
-title       : Insert the chapter title here
-description : Insert the chapter description here
-attachments :
-  slides_link : https://s3.amazonaws.com/assets.datacamp.com/course/teach/slides_example.pdf
+title       : Faktor-tüüpi tunnus
+description : Faktor-tüüpi tunnuse kasutamine
+--- type:NormalExercise lang:r xp:100 skills:1 key:35f7f6fc0f
+## Faktori tasemete järjestamine 
 
----
-## A really bad movie
+Töölaual on andmestik `iris`. Andmed on kolme sort iiriste(lilled mitte kommid!) õie mõõtmete kohta. Mõõdetud on õielehtede (kroonlehed - ik *petal*, tupplehed - ik *sepal*) pikkus ja laius sentimeetrites.
 
-```yaml
-type: MultipleChoiceExercise
-lang: r
-xp: 50
-skills: 1
-key: 7da8f5659b
-```
 
-Have a look at the plot that showed up in the viewer to the right. Which type of movie has the worst rating assigned to it?
+Vaata kõigepealt käsuga `summary(iris)` andmestiku ülevaadet. Tunnus `Species` näitab iirise sorti.
 
-`@instructions`
-- Adventure
-- Action
-- Animation
-- Comedy
 
-`@hint`
-Have a look at the plot. Which color does the point with the lowest rating have?
+*** =instructions
+- **Ülesanne 1** Käsu `by` abil leia kõigi kolme iirisesordi kroonlehe keskmine pikkus (kroonlehe pikkus `Petal.Length`), omista saadud vastus muutujale `keskmised`, prindi selle väärtus ekraanile.
+- **Ülesanne 2**  Millise sordi kroonlehed on keskmiselt kõige lühemad? Omista selle sordi nimi muuutjale `kroonlehed1`.
+- **Ülesanne 3** Kasutades `factor` käsku lisa andmestikku tunnus nimega `sordinimi`, mis oleks sama sisuga kui `Species`, kuid mille väärtuste järjekord oleks: `versicolor`, `setosa`, `virginica`.
+- **Ülesanne 4** Kasutades `tapply` käsku leia maksimaalsed kroonlehe pikkused igal sordil, tulemuste järjestus muutujas `maksimumid` olgu järgmine: `versicolor`, `setosa`, `virginica`. Prindi muutuja väärtus ekraanile. Käsu `tapply` kirjapilt `tapply(uuritavtunnus, grupitunnus, funktsioon)`.
 
-`@pre_exercise_code`
+
+*** =hint
+- `by` käsu kirjapilt on järgmine: `by(uuritavtunnus, grupitunnus, funktsioon)`.
+- Faktori tasemete ümberjärjestamiseks kasuta `factor` käsku, andes argumendile `levels` väärtuseks sordinimede vektori nõutud järjestuses.
+
+
+*** =pre_exercise_code
 ```{r}
-# The pre exercise code runs code to initialize the user's workspace.
-# You can use it to load packages, initialize datasets and draw a plot in the viewer
-
-movies <- read.csv("http://s3.amazonaws.com/assets.datacamp.com/course/introduction_to_r/movies.csv")
-
-library(ggplot2)
-
-ggplot(movies, aes(x = runtime, y = rating, col = genre)) + geom_point()
+#
 ```
 
-`@sct`
+*** =sample_code
 ```{r}
-# SCT written with testwhat: https://github.com/datacamp/testwhat/wiki
+# Vaata esmalt andmestikust ülevaadet
+summary(iris)
 
-msg_bad <- "That is not correct!"
-msg_success <- "Exactly! There seems to be a very bad action movie in the dataset."
-test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success, msg_bad, msg_bad))
+
+# Ülesanne 1: Leia keskmised kroonlehepikkused käsu by abil
+keskmised <- by(_______________)
+keskmised
+
+
+# Ülesanne 2: Mis sordil keskmiselt kõige lühemad kroonlehed
+kroonlehed1 <- "_________"
+
+
+# Ülesanne 3: Muuda sordinimede järjestust, tekita selleks uus tunnus
+iris$sordinimi <- ____________________________
+
+
+# Ülesanne 4: Leia maksimaalne kroonlehe pikkus sortide kaupa, sordid olgu uues järjestuses
+maksimumid <- tapply(____________)
+maksimumid
 ```
 
----
-## More movies
 
-```yaml
-type: NormalExercise
-lang: r
-xp: 100
-skills: 1
-key: 6ea6a3065c
-```
 
-In the previous exercise, you saw a dataset about movies. In this exercise, we'll have a look at yet another dataset about movies!
 
-A dataset with a selection of movies, `movie_selection`, is available in the workspace.
-
-`@instructions`
-- Check out the structure of `movie_selection`.
-- Select movies with a rating of 5 or higher. Assign the result to `good_movies`.
-- Use `plot()` to  plot `good_movies$Run` on the x-axis, `good_movies$Rating` on the y-axis and set `col` to `good_movies$Genre`.
-
-`@hint`
-- Use `str()` for the first instruction.
-- For the second instruction, you should use `...[movie_selection$Rating >= 5, ]`.
-- For the plot, use `plot(x = ..., y = ..., col = ...)`.
-
-`@pre_exercise_code`
+*** =solution
 ```{r}
-# You can also prepare your dataset in a specific way in the pre exercise code
-load(url("https://s3.amazonaws.com/assets.datacamp.com/course/teach/movies.RData"))
-movie_selection <- Movies[Movies$Genre %in% c("action", "animated", "comedy"), c("Genre", "Rating", "Run")]
+# Vaata esmalt andmestikust ülevaadet
+summary(iris)
 
-# Clean up the environment
-rm(Movies)
+
+# Ülesanne 1: Leia keskmised kroonlehepikkused käsu by abil
+keskmised <- by(iris$Petal.Length, iris$Species, mean)
+keskmised
+
+
+# Ülesanne 2: Mis sordil keskmiselt kõige lühemad kroonlehed
+kroonlehed1 <- "setosa"
+
+
+# Ülesanne 3: Muuda sordinimede järjestust, tekita selleks uus tunnus
+iris$sordinimi <- factor(iris$Species, levels = c("versicolor", "setosa", "virginica"))
+
+
+# Ülesanne 4: Leia maksimaalne kroonlehe pikkus sortide kaupa, sordid olgu uues järjestuses
+maksimumid <- tapply(iris$Petal.Length, iris$sordinimi, max)
+maksimumid
 ```
 
-`@sample_code`
+*** =sct
 ```{r}
-# movie_selection is available in your workspace
+# 1
+test_function(name = "by",
+              args = c("data", "INDICES", "FUN"),
+              index = 1,
+             eq_condition = "equivalent",
+             not_called_msg = "Esimeses ülesandes pead kasutama funktsiooni `by`.",
+             args_not_specified_msg = paste("Käsus `by` on vaja ", 
+             c("esimeseks argumendiks panna uuritav tunnus", 
+             "teiseks argumendiks vaja määrata grupeeriv tunnus", 
+             "kolmandaks argumendiks panna selle funktsiooni nimi, mida tahame uuritavale tunnusele rakendada")),
+             incorrect_msg = paste("Käsus `by` on praegu ", 
+             c("esimene argument  vale.",
+             "teine argument vale.", 
+             "kolmas argument vale, kirjuta kolmandale kohale funktsiooni nimi `mean`."))) 
 
-# Check out the structure of movie_selection
+
+test_object("keskmised", 
+            undefined_msg = "Muutuja  `keskmised` on defineerimata.",
+            incorrect_msg = "Muutuja  `keskmised` väärtus ei ole korrektne. Proovi uuesti." )
 
 
-# Select movies that have a rating of 5 or higher: good_movies
+# 2
+test_object("kroonlehed1", 
+            undefined_msg = "Muutuja  `kroonlehed1` on defineerimata.",
+            incorrect_msg = "Muutuja  `kroonlehed1` väärtus ei ole korrektne. Proovi uuesti." )
 
 
-# Plot Run (i.e. run time) on the x axis, Rating on the y axis, and set the color using Genre
+# 3
+test_function(name = "factor",
+              args = c("levels"),
+              index = 1,
+             eq_condition = "equivalent",
+             not_called_msg = "Kolmandas ülesandes pead kasutama funktsiooni `factor`.",
+             args_not_specified_msg = "Käsus `factor` pead määrama argumendi `levels` väärtuse.",
+             incorrect_msg = "Käsus `factor` on argumendi `levels` väärtus vale, see peaks olema vektor nõutud järjekorras sordinimedega.") 
+
+
+test_data_frame("iris", columns = c("sordinimi"),
+                undefined_msg = "Ära kustuta andmstikku `iris`!",
+                undefined_cols_msg = "Kas oled andmestikku `iris` lisanud veeru `sordinimi`?",
+                incorrect_msg = "Kas oled uue faktori `sordinimi` õigesti väärtustanud ?")
+
+
+
+# 4
+test_function(name = "tapply",
+              args = c("X", "INDEX", "FUN"),
+              index = 1,
+             eq_condition = "equal",
+             not_called_msg = "Viimases ülesandes pead kasutama funktsiooni `tapply`.",
+             args_not_specified_msg = paste("Käsus `tapply` on vaja ", 
+             c("esimeseks argumendiks panna uuritav tunnus", 
+             "teiseks argumendiks vaja määrata grupeeriv tunnus",
+             "kolmandaks argumendiks panna selle funktsiooni nimi, mida tahame uuritavale tunnusele rakendada")),
+             incorrect_msg = paste("Käsus `tapply` on praegu ", 
+             c("esimene argument  vale.",
+             "teine argument vale, pane selleks eelmises punktis loodud tunnus.", 
+             "kolmas argument vale, kirjuta kolmandale kohale funktsiooni nimi `max`."))) 
+
+
+test_object("maksimumid", 
+            undefined_msg = "Muutuja  `maksimumid` on defineerimata.",
+            incorrect_msg = "Muutuja  `maksimumid` väärtus ei ole korrektne. Proovi uuesti." )
+
+ 
+
+
+
+#
+success_msg("Tubli! Esimesed ülesanded on tehtud.")
+
 
 ```
 
-`@solution`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:4229ba4b81
+## Faktor-tunnuse loomine arvtunnusest
+
+
+Töölaual on andmestik `iris`. Andmed on kolme sort iiriste(lilled mitte kommid!) õie mõõtmete kohta. Mõõdetud on õielehtede (kroonlehed - ik *petal*, tupplehed - ik *sepal*) pikkus ja laius sentimeetrites.
+
+
+Kui arvtunnuse väärtused on vaja jagada intervallidesse, siis saab kasutada käsku `cut`. Loodav tunnus on faktor-tüüpi. 
+
+ 
+
+
+*** =instructions
+- **Ülesanne 1** Jaga kroonlehtede pikkuse tunnus `Petal.Length` intervallidesse, selleks tekita uus tunnus `intervallid`. Intervallid olgu pikkusega 0.5 sentimeetrit ja kujul: `[1, 1.5)`, `[1.5, 2)` jne kuni `[6.7, 7)`. Ära tekkivate faktoritasemetele silte muuda.
+- **Ülesanne 2** Kontrolli, kas uus tunnus `intervallid` on ikka faktor-tüüpi. Pane kirja, mis funktsiooniga saab faktor-tüübile vastavust kontrollida.
+- **Ülesanne 3** Leia uue tunnuse sagedustabel. Omista see muutujale `sagedustabel` ja prindi ekraanile.
+- **Ülesanne 4** Vaata sagedustebelist mitu intervalli jäi tühjaks? Omista tühjade intervallide arv muutujale `tyhjad`.
+
+
+*** =hint
+- Vaata `cut` käsu abifaili, loe milleks saab kasutada argumenti `right`.
+- Ära määra `cut` käsus argumenti `labels`.
+
+
+*** =pre_exercise_code
 ```{r}
-# movie_selection is available in your workspace
-
-# Check out the structure of movie_selection
-str(movie_selection)
-
-# Select movies that have a rating of 5 or higher: good_movies
-good_movies <- movie_selection[movie_selection$Rating >= 5, ]
-
-# Plot Run (i.e. run time) on the x axis, Rating on the y axis, and set the color using Genre
-plot(good_movies$Run, good_movies$Rating, col = good_movies$Genre)
+#pole
 ```
 
-`@sct`
+
+
+*** =sample_code
 ```{r}
-# SCT written with testwhat: https://github.com/datacamp/testwhat/wiki
+# Vaata esmalt andmestikust ülevaadet
+summary(iris)
 
-test_function("str", args = "object",
-              not_called_msg = "You didn't call `str()`!",
-              incorrect_msg = "You didn't call `str(object = ...)` with the correct argument, `object`.")
 
-test_object("good_movies")
+#Ülesanne 1 Jaga kroonlehtede pikkus intervallidesse
+intervallid <- cut(______________)
 
-test_function("plot", args = "x")
-test_function("plot", args = "y")
-test_function("plot", args = "col")
 
-test_error()
+#Ülesanne 2: Kas muutuja intervallid on faktor-tüüpi?
+__.______(intervallid)
 
-success_msg("Good work!")
+
+#Ülesanne 3: Sagedustabel
+sagedustabel <- ________(intervallid)
+sagedustabel
+
+
+#Ülesanne 4: Mitu tühja intervalli tekkis?
+tyhjad <- __
+
+```
+
+
+
+*** =solution
+```{r}
+# Vaata esmalt andmestikust ülevaadet
+summary(iris)
+
+
+#Ülesanne 1 Jaga kroonlehtede pikkus intervallidesse
+intervallid <- cut(iris$Petal.Length, br = seq(1, 7, 0.5),  right = FALSE)
+
+
+#Ülesanne 2: Kas muutuja intervallid on faktor-tüüpi?
+is.factor(intervallid)
+
+
+#Ülesanne 3: Sagedustabel
+sagedustabel <- table(intervallid)
+sagedustabel
+
+
+#Ülesanne 4: Mitu tühja intervalli tekkis?
+tyhjad <- 2
+
+
+```
+
+
+
+*** =sct
+```{r}
+# 1
+test_function(name = "cut",
+              args = c("x", "breaks", "right"),
+              index = 1,
+             eq_condition = "equivalent",
+             not_called_msg = "Esimeses ülesandes pead kasutama funktsiooni `cut`.",
+             args_not_specified_msg = paste("Käsus `cut` on vaja ", 
+             c("esimeseks argumendiks panna intervallidesse jagatav tunnus", 
+             "teiseks argumendiks  määrata lõikepunktid", 
+             "määrata   argumendi `right` väärtus.")),
+             incorrect_msg = paste("Käsus `cut` on praegu ", 
+             c("esimene argument vale.", 
+             "lõikepunktid valed.", 
+             "intervallide kuju vale, muuda argumendi `right` väärtus."))) 
+
+
+test_object("intervallid", 
+            undefined_msg = "Muutuja `intervallid` on defineerimata.",
+            incorrect_msg = "Muutuja `intervallid` väärtus ei ole korrektne. Proovi uuesti." )
+
+
+# 2
+test_function(name = "is.factor", 
+              args = c("x"),
+              index = 1,
+             eq_condition = "equivalent",
+             not_called_msg = "Teises ülesandes pead kasutama funktsiooni `is.factor`.",
+             args_not_specified_msg = NULL,
+             incorrect_msg = "Funktsioonile `is.factor` on antud vale argument.")
+
+# 3
+test_function(name = "table", 
+                args = NULL,
+              index = 1,
+             eq_condition = "equivalent",
+             not_called_msg = "Kolmandas ülesandes pead kasutama funktsiooni `table`.",
+             args_not_specified_msg = NULL,
+             incorrect_msg = "Funktsioonile `table` on antud vale argument.")
+
+test_object("sagedustabel", 
+            undefined_msg = "Muutuja  `sagedustabel` on defineerimata.",
+            incorrect_msg = "Muutuja  `sagedustabel` väärtus ei ole korrektne. Proovi uuesti." )
+
+
+
+#4
+test_object("tyhjad", 
+            undefined_msg = "Muutuja  `tyhjad` on defineerimata.",
+            incorrect_msg = "Muutuja  `tyhjad` väärtus ei ole korrektne. Proovi uuesti." )
+
+
+
+
+
+success_msg("Hästi!")
+
+
+
 ```
