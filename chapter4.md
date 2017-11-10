@@ -68,8 +68,8 @@ str(tekstid)
 
 # Ülesanne 1: tuvasta stringi esinemine
 esineb <- str_detect(tekstid$tekst, pattern = "[E|e]esti")
-# või
-# esineb <- str_count(tekstid$tekst, pattern = "[E|e]esti") > 0 
+# või ka
+esineb.alt <- str_count(tekstid$tekst, pattern = "[E|e]esti") > 0 
 
 # Ülesanne 2: sagedustabeli leidmine
 sagedustabel <- table(tekstid$hinnang, esineb)
