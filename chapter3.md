@@ -160,7 +160,7 @@ summary(rotid)
 library(reshape2)
 
 
-# ÜLesanne 2: vii andmestik laiale kujule
+# Ülesanne 2: vii andmestik laiale kujule
 rotid.lai <- dcast(rotid, Rat + Diet ~ Time, value.var = "weight")
 
 
