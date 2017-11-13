@@ -17,7 +17,7 @@ Mõõdetud on apelsinipuude tüve ümbermõõtu (`circumference`). Iga puud on m
 
 *** =hint
 - Kuupäevad saad luua `as.Date` funtksiooniga, määrama peab ka `origin` argumendi - see on kuupäev milest alates päevi hakati loendama.
-- Käsus `difftime` on kaks esimest argumenti ajavektorid: `ajad[-1]` ja `ajad[-length(ajad)]`.
+- Käsus `difftime` on kaks esimest argumenti ajavektorid: `ajad[-1]` ja `ajad[-length(ajad)]`. Kasutada on vaja argumenti `units`.
 
 *** =pre_exercise_code
 ```{r}
@@ -65,7 +65,6 @@ ajad <- unique(apelsinid$kuupaev)
 # Ülesanne 3: Kui pikk on mõõtmistevaheline aeg nädalates?
 nadalad <- difftime(ajad[-1], ajad[-length(ajad)], units = "weeks")
 nadalad
-
 
 ```
 
