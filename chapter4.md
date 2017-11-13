@@ -52,7 +52,7 @@ esineb <- _______________________
 sagedustabel <- table(______________)
 sagedustabel
 
-#Ülesanne 3: osakaalude leidmine
+# Ülesanne 3: osakaalude leidmine
 tinglikjaotus <- __________________
 tinglikjaotus
 
@@ -75,7 +75,7 @@ esineb.alt <- str_count(tekstid$tekst, pattern = "[Ee]esti") > 0
 sagedustabel <- table(tekstid$hinnang, esineb)
 sagedustabel
 
-#Ülesanne 3: osakaalude leidmine
+# Ülesanne 3: osakaalude leidmine
 tinglikjaotus <- prop.table(sagedustabel, 2)
 tinglikjaotus
 ```

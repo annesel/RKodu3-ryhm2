@@ -404,7 +404,7 @@ rott2mediaan <- _______
 # vaata andmestikku
 summary(rotid)
 
-# Ülesanne 1: Leia tabel dcast käsuga
+# Ülesanne 1: Leia mediaanide tabel dcast käsuga
 tabel3 <- dcast(rotid, Diet + Rat ~ "kaalu mediaan", fun.aggregate = median, value.var = "weight")
 tabel3
 
