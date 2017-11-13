@@ -146,8 +146,7 @@ ______(reshape2)
 # Ülesanne 2: vii andmestik laiale kujule
 rotid.lai <- dcast(_______________________)
 
-# Ülesanne 3: prindi uus andmestik ekraaanile
-____________
+# Ülesanne 3: prindi uus andmestik ekraanile____________
 
 ```
 
@@ -164,8 +163,7 @@ library(reshape2)
 rotid.lai <- dcast(rotid, Rat + Diet ~ Time, value.var = "weight")
 
 
-# Ülesanne 3: prindi uus andmestik ekraaanile
-rotid.lai 
+# Ülesanne 3: prindi uus andmestik ekraanilerotid.lai 
 
 ```
 
