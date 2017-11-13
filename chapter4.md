@@ -18,13 +18,13 @@ Pakett `stringr` on juba aktiveeritud.
 
 
 *** =instructions
-- **Ülesanne 1** Kasutades paketi `stringr` sobivat käsku tuvasta, millistes tekstilõikudes esineb string 'Eesti' või 'eesti'. Tulemuseks peaks olema tõevektor (`TRUE` kui otsitav väärtus on tekstis), omista see muutujale `esineb`. Väike/suurtähe võimaluse otsitavas tekstis saab kirja panna järgnevalt `[S|s]uurtäht`.
+- **Ülesanne 1** Kasutades paketi `stringr` sobivat käsku tuvasta, millistes tekstilõikudes esineb string 'Eesti' või 'eesti'. Tulemuseks peaks olema tõevektor (`TRUE` kui otsitav väärtus on tekstis), omista see muutujale `esineb`. Väike/suurtähe võimaluse otsitavas tekstis saab kirja panna järgnevalt `[Ss]uurtäht`.
 - **Ülesanne 2** Kasutades eelmises ülesandes tekitatud tunnust leia käsuga `table` sagedustabel, kus oleks näha tekstilõigu emotsionaalsete hinnangute kaupa ülalvaadatud stringi esinemissagedused.
 Määra emotsiooni tunnus sagedustabelis reatunnuseks. Tekkiv sagedustabel omista muutujale `sagedustabel`, prindi see ekraanile.
 - **Ülesanne 3** Kasutades eelnevalt tekitatud sagedustabeli-objekti leia tekstilõikude hinnangute jaotus mõlemas tekstilõikude grupis (st nii nende lõikude osas, kus stringi ei esinenud, kui selles grupis, kus esines). Omista saadud tabel muutujale `tinglikjaotus`, prindi see ekraanile.
 
 *** =hint
-- Esimeses ülesandes kasuta funktsiooni `str_detect` või  `str_count`, kus määra `pattern` argumendiks `[E|e]esti`. Käsk `str_count` annab tulemsueks esinemiste arvu, seega nõutud tõeväärtustega vektori saamiseks peab veel kontrollima, kas tulemused on üle nulli.
+- Esimeses ülesandes kasuta funktsiooni `str_detect` või  `str_count`, kus määra `pattern` argumendiks `[Ee]esti`. Käsk `str_count` annab tulemuseks esinemiste arvu, seega nõutud tõeväärtustega vektori saamiseks peab veel kontrollima, kas tulemused on üle nulli.
 - Kolmandas ülesandes kasuta käsku `prop.table`, määrama peab ka selle, kas jaotus leida kogu tabeli summa või rea/veerusummade suhtes.
 
 *** =pre_exercise_code
@@ -67,9 +67,9 @@ str(tekstid)
 
 
 # Ülesanne 1: tuvasta stringi esinemine
-esineb <- str_detect(tekstid$tekst, pattern = "[E|e]esti")
+esineb <- str_detect(tekstid$tekst, pattern = "[Ee]esti")
 # või ka
-esineb.alt <- str_count(tekstid$tekst, pattern = "[E|e]esti") > 0 
+esineb.alt <- str_count(tekstid$tekst, pattern = "[Ee]esti") > 0 
 
 # Ülesanne 2: sagedustabeli leidmine
 sagedustabel <- table(tekstid$hinnang, esineb)
@@ -123,7 +123,7 @@ test_function(name = "str_count",
              "teiseks argumendiks panna otsitav string")),
              incorrect_msg = paste("Käsus `str_count` on praegu ", 
              c("esimene argument  vale.",
-             "teine argument   vale, määra otsitavaks stringiks `[E|e]esti`.")))
+             "teine argument   vale, määra otsitavaks stringiks `[Ee]esti`.")))
 )
 
 

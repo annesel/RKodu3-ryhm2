@@ -432,7 +432,7 @@ test_function(name = "dcast",
                                                " seekord vaja ka argumenti `value.var`.")),
               incorrect_msg =   paste("Käsus `dcast` on  ", 
                                       c("vale andmestik",
-                                        "`formula` argumendi väärtus vale. Tabelis võiks reas esimene väärtus olla dieedi number, teine roti number", 
+                                        "`formula` argumendi väärtus vale. Tabelis võiks reas esimene väärtus olla dieedi number, teine roti number ja kolmas leitud mediaan veerus `kaalu mediaan`", 
                                         "`fun.aggregate` argumendi väärtus vale.", 
                                         " argumendi `value.var` väärtus vale. Mis tunnuse mediaani on vaja leida?"
                                         )))
