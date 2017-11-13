@@ -51,6 +51,8 @@ library(reshape2)
 # ÜLesanne 2: vii andmestik pikale kujule
 testid.pikk <- melt(B, measure.vars = 3:42, id.vars = 1)
 str(testid.pikk)
+
+
 ```
 
 *** =sct
